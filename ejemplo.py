@@ -20,6 +20,10 @@ print("Desviacion estandar: ", desviacion_estandar)
 varianza = round(df['Valores'].var(),2)
 print("Varianza: ", varianza )
 
+#Moda
+moda = df['Valores'].mode() #Si no se repite ninguno te devuelve todos los datos
+print("Moda: ", moda)
+
 
 #Percentiles
 
