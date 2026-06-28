@@ -41,3 +41,18 @@ outliers = df[
     (df['precio_promedio'] < limite_inf['precio_promedio']) | (df['precio_promedio'] > limite_sup['precio_promedio'])
 ]
 print("Outliers:\n", outliers)
+# CONCLUSIÓN OUTLIERS:
+# - cantidad = 950 (Sur, Bebidas): se mantiene. La zona Sur al ser
+#   más cálida puede generar picos altos de demanda de bebidas.
+# - precio_promedio = 42.50 (Norte, Pescados): se mantiene. Las zonas
+#   del norte suelen tener pescados de mayor calidad y precio elevado.
+# - Ambos outliers afectan a la media, pero tienen justificación contextual.
+
+"""
+#PUNTO 3. GRAFICO DE BARRAS E HISTOGRAMA, para ello necesito saber la cantidad por ZONA Y CATEGORIA
+#df.groupby('columna_a_agrupar')['columna_a_sumar'].sum()
+zona = df.groupby('zona')['cantidad'].sum()
+print(zona)
+categoria = df.groupby('categoria_comida')['cantidad'].sum()
+print( categoria)
+"""
