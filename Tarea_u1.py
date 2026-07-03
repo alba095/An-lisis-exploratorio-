@@ -1,4 +1,5 @@
 import pandas as pd
+import matplotlib.pyplot as plt 
 
 df = pd.read_csv("ventas_comida.csv")
 
@@ -6,7 +7,7 @@ cols = df[['cantidad', 'precio_promedio']]
 
 #Realizar un análisis inicial con medidas estadísticas básicas
 #MEDIDAS DE TENDENCIA CENTRAL 
-
+"""
 print("CENTRALIZACIÓN")
 media= round(cols.mean(),2)
 print("Media: \n" , media)
@@ -48,11 +49,44 @@ print("Outliers:\n", outliers)
 #   del norte suelen tener pescados de mayor calidad y precio elevado.
 # - Ambos outliers afectan a la media, pero tienen justificación contextual.
 
-"""
+
 #PUNTO 3. GRAFICO DE BARRAS E HISTOGRAMA, para ello necesito saber la cantidad por ZONA Y CATEGORIA
 #df.groupby('columna_a_agrupar')['columna_a_sumar'].sum()
 zona = df.groupby('zona')['cantidad'].sum()
 print(zona)
 categoria = df.groupby('categoria_comida')['cantidad'].sum()
 print( categoria)
-"""
+zona.plot(kind='bar')#Dibuja el grafico de barras
+plt.title('Pedidos por zona')#Le da el titulo
+plt.xlabel('zonas')#Nombra lo que representa el eje x
+plt.ylabel('cantidad')#Nombra lo que representa el eje y
+plt.show()#Renderiza la ventana con el grafico
+categoria.plot(kind='bar')
+plt.title('Pedidos por categoria')
+plt.xlabel('Categorias')
+plt.ylabel('cantidad')
+plt.show()
+#histograma
+df['cantidad'].plot(kind='hist')#dibuja el histograma
+plt.title('Histograma cantidad')
+plt.xlabel('valores')
+plt.ylabel('veces')
+plt.show()"""
+
+#Evaluar la tendencia de los pedidos en el tiempo (GRAFICA DE LINEAS)
+#primero pasamos fecha a tipo int
+df['fecha'] = pd.to_datetime(df['fecha'])
+#ahora tenemos que agrupar los pedidos por mes
+#df.groupby(df['columna_a_agrupar'])['columna_a_sumar'].sum()
+pedidos_mes = df.groupby(df['fecha'].dt.month)['cantidad'].sum() # el dt.month extrae el numero del mes de cada fecha
+#ahora si creamos la grafica de lineas
+pedidos_mes.plot(kind='line')
+plt.title('Cantidad de pedidos')
+plt.xlabel('Meses')
+plt.ylabel('Tendencia')
+plt.show()
+
+
+
+
+
