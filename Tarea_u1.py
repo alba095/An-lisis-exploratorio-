@@ -7,7 +7,7 @@ cols = df[['cantidad', 'precio_promedio']]
 
 #Realizar un análisis inicial con medidas estadísticas básicas
 #MEDIDAS DE TENDENCIA CENTRAL 
-"""
+
 print("CENTRALIZACIÓN")
 media= round(cols.mean(),2)
 print("Media: \n" , media)
@@ -51,7 +51,7 @@ print("Outliers:\n", outliers)
 
 
 #PUNTO 3. GRAFICO DE BARRAS E HISTOGRAMA, para ello necesito saber la cantidad por ZONA Y CATEGORIA
-#df.groupby('columna_a_agrupar')['columna_a_sumar'].sum()
+
 zona = df.groupby('zona')['cantidad'].sum()
 print(zona)
 categoria = df.groupby('categoria_comida')['cantidad'].sum()
@@ -67,14 +67,14 @@ plt.xlabel('Categorias')
 plt.ylabel('cantidad')
 plt.show()
 #histograma
-df['cantidad'].plot(kind='hist')#dibuja el histograma
+df['cantidad'].plot(kind='hist', bins=20)#dibuja el histograma
 plt.title('Histograma cantidad')
 plt.xlabel('valores')
 plt.ylabel('veces')
-plt.show()"""
+plt.show()
 
-#Evaluar la tendencia de los pedidos en el tiempo (GRAFICA DE LINEAS)
-#primero pasamos fecha a tipo int
+#4.Evaluar la tendencia de los pedidos en el tiempo (GRAFICA DE LINEAS)
+#primero pasamos fecha a datetime
 df['fecha'] = pd.to_datetime(df['fecha'])
 #ahora tenemos que agrupar los pedidos por mes
 #df.groupby(df['columna_a_agrupar'])['columna_a_sumar'].sum()
@@ -83,7 +83,7 @@ pedidos_mes = df.groupby(df['fecha'].dt.month)['cantidad'].sum() # el dt.month e
 pedidos_mes.plot(kind='line')
 plt.title('Cantidad de pedidos')
 plt.xlabel('Meses')
-plt.ylabel('Tendencia')
+plt.ylabel('Cantidad')
 plt.show()
 
 
